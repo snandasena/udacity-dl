@@ -130,3 +130,7 @@ dmypy.json
 
 .idea/
 *.swp
+calibration_wide/wide_dist_pickle.p
+src/.camera_calibration.py.swp
+src/.camera_calibration.py.swp
+.*.swp
