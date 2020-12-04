@@ -27,10 +27,13 @@ scaled_sobel_x = np.uint8(255*abs_sobel_x/np.max(abs_sobel_x))
 # Create binary thresold to select pixels based on gradient strenth
 thresh_mn = 20
 thresh_mx = 100
-sxbinary = np.zeros_like(scaled_sobel_x)
 
-sxbinary[(scaled_sobel_x >=thresh_mn) & (scaled_sobel_x <= thresh_mx)] = 1
-print(sxbinary)
-cv2.imshow("Sobel X Binary", sxbinary)
+(thresh, img_bw) = cv2.threshold(
+        scaled_sobel_x, 
+        thresh_mn, 
+        thresh_mx, 
+        cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+
+cv2.imshow("CV2 Binary", img_bw)
 cv2.waitKey(0)
 
