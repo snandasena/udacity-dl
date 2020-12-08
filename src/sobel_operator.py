@@ -20,20 +20,22 @@ abs_sobel_x = np.absolute(sobel_x)
 #cv2.imshow("Absolute Sobel X",abs_sobel_x)
 #cv2.waitKey(1000)
 
-scaled_sobel_x = np.uint8(255*abs_sobel_x/np.max(abs_sobel_x))
+scaled_sobel = np.uint8(255*abs_sobel_x/np.max(abs_sobel_x))
 #cv2.imshow("Scaled Sobel X", scaled_sobel_x)
 #cv2.waitKey(1000)
 
 # Create binary thresold to select pixels based on gradient strenth
 thresh_mn = 20
 thresh_mx = 100
+binary_sobel = np.zeros_like(scaled_sobel)
+binary_sobel[(scaled_sobel >= thresh_mn) & (scaled_sobel <= thresh_mx)] = 255
 
-(thresh, img_bw) = cv2.threshold(
-        scaled_sobel_x, 
-        thresh_mn, 
-        thresh_mx, 
-        cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+# (thresh, img_bw) = cv2.threshold(
+#         scaled_sobel_x,
+#         thresh_mn,
+#         thresh_mx,
+#         cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 
-cv2.imshow("CV2 Binary", img_bw)
+cv2.imshow("CV2 Binary", binary_sobel)
 cv2.waitKey(0)
 
